@@ -8,6 +8,61 @@ admin.initializeApp();
 
 const db = admin.firestore().collection("usuarios");
 
+//recuperar usuario authenticado
+// getAuth() {
+// 	return this.angularFireAuth.auth;
+// }
+
+//registrar usuario
+// register(user: LoginContext) {
+//     return this.angularFireAuth.auth.createUserWithEmailAndPassword(user.email, user.password);
+// }
+
+//recuperar senha 
+// resetPassword(email: string){
+//     return this.angularFireAuth.auth.sendPasswordResetEmail(email);
+// }
+
+//sair do app
+// logout(){
+//     return this.angularFireAuth.auth.signOut();
+// }
+
+// login
+// app.post("login", (request, response) => {
+// 	return this.angularFireAuth.auth.signInWithEmailAndPassword(user.email, user.password);
+// });
+
+//recuperar todos usuarios
+// usuarios(user: any, groupUser) {
+// 	return this.angularFirestore.collection('usuarios').doc<User>(groupUser.user.uid).set(user)
+// }
+
+//recuperar usuario atual
+// getDatePersonal(id: string) {
+// 	return this.angularFirestore.collection('usuarios').doc<User>(id).valueChanges();
+// }
+
+//alterar usuario atual
+// updateDatePersonal(id: string, person: User) {
+// 	return this.angularFirestore.collection('usuarios').doc<User>(id).update(person);
+// }
+
+// refefencia da imagem
+// refPicture(namePicture: string){
+// 	return this.angularFireStorage.ref(`img/profile/${namePicture}`);
+// }
+
+// atualizar imagem
+// uploadPicture(refPicture, blob: Blob){
+// 	return refPicture.put(blob);
+// }
+
+//remover imagem
+// removePicture(refPicture: string){
+// 	return this.angularFireStorage.storage.refFromURL(refPicture).delete();
+// }
+
 app.get("/users", (request, response) => {
 	return db.get().then((docs) => {
 		let users = [];
