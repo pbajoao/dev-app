@@ -85,6 +85,15 @@ app.get("/users", (request, response) => {
 
 app.post("/user", (request, response) => {
 
+	let obj = request.body;
+
+	for (let key in obj){
+
+		if (obj[key] === ''){
+			return response.json({"campo nulo":key});
+		}
+	}
+
 	return db.add({ 
 		birth: request.body.birth,
 		dateRegister: request.body.dateRegister,
@@ -97,7 +106,7 @@ app.post("/user", (request, response) => {
 		nick: request.body.nick
 	})
 		.then(() => {
-			return response.json({"response":"inserido"});
+			return response.json({"response":"inserido com sucesso!"});
 		})
 })
 
