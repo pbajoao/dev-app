@@ -6,7 +6,9 @@ const admin = require('firebase-admin');
 
 admin.initializeApp();
 
-const db = admin.firestore().collection("usuarios");
+const db = admin.firestore();
+
+const db_users = db.collection("usuarios");
 
 //recuperar usuario authenticado
 // getAuth() {
@@ -29,9 +31,20 @@ const db = admin.firestore().collection("usuarios");
 // }
 
 // login
-// app.post("login", (request, response) => {
-// 	return this.angularFireAuth.auth.signInWithEmailAndPassword(user.email, user.password);
-// });
+ app.post("/login", (request, response) => {
+
+ 	let obj = request.body;
+
+ 	for (key in obj){
+
+ 		if (obj[key] === ''){
+
+ 			return response.json({"campo nulo":obj[key]});
+ 		}
+ 	}
+
+ 	return db.angularFireAuth.auth.signInWithEmailAndPassword(request.body.email, request.body.password);
+ });
 
 //recuperar todos usuarios
 // usuarios(user: any, groupUser) {
@@ -64,7 +77,7 @@ const db = admin.firestore().collection("usuarios");
 // }
 
 app.get("/users", (request, response) => {
-	return db.get().then((docs) => {
+	return db_users.get().then((docs) => {
 		let users = [];
 		docs.forEach((doc) => {
 			users.push({
@@ -83,6 +96,7 @@ app.get("/users", (request, response) => {
 	});
 })
 
+//infos do usuário
 app.post("/user", (request, response) => {
 
 	let obj = request.body;
@@ -94,7 +108,7 @@ app.post("/user", (request, response) => {
 		}
 	}
 
-	return db.add({ 
+	return db_users.add({ 
 		birth: request.body.birth,
 		dateRegister: request.body.dateRegister,
 		foot: request.body.foot,
