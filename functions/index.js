@@ -84,6 +84,7 @@ app.get("/users", (request, response) => {
 })
 
 app.post("/user", (request, response) => {
+
 	return db.add({ 
 		birth: request.body.birth,
 		dateRegister: request.body.dateRegister,
@@ -96,7 +97,7 @@ app.post("/user", (request, response) => {
 		nick: request.body.nick
 	})
 		.then(() => {
-			return response.json(null);
+			return response.json({"response":"inserido"});
 		})
 })
 
